@@ -86,7 +86,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kqa-aV-VGs">
-                                <rect key="frame" x="154" y="392" width="85" height="35"/>
+                                <rect key="frame" x="154" y="469" width="85" height="35"/>
                                 <color key="backgroundColor" red="0.0" green="0.45882352939999999" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
@@ -95,20 +95,38 @@
                                     <action selector="agregarTapped:" destination="gzl-Ch-wRC" eventType="touchUpInside" id="ztB-F1-2Ij"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clW-4d-4VE">
+                                <rect key="frame" x="20" y="392" width="353" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Kop-9d-kqA">
+                                <rect key="frame" x="18" y="414" width="357" height="31"/>
+                                <connections>
+                                    <action selector="cambiarVolumen:" destination="gzl-Ch-wRC" eventType="valueChanged" id="6tH-jq-CAa"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ASr-WN-dj0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="tLV-nH-A4b" firstAttribute="centerX" secondItem="fh6-3V-2Xv" secondAttribute="centerX" id="1wK-HX-r7X"/>
+                            <constraint firstItem="Kqa-aV-VGs" firstAttribute="top" secondItem="Kop-9d-kqA" secondAttribute="bottom" constant="25" id="5e8-7q-G7c"/>
+                            <constraint firstItem="Kop-9d-kqA" firstAttribute="leading" secondItem="ASr-WN-dj0" secondAttribute="leading" constant="20" id="6Mx-yQ-6gf"/>
                             <constraint firstItem="Jvp-Yx-0uF" firstAttribute="top" secondItem="tLV-nH-A4b" secondAttribute="bottom" constant="20" id="73U-1e-1qR"/>
                             <constraint firstItem="5Ng-G6-Mib" firstAttribute="top" secondItem="wjS-eo-CS9" secondAttribute="bottom" constant="20" id="DNj-SQ-hsE"/>
                             <constraint firstItem="tLV-nH-A4b" firstAttribute="top" secondItem="ASr-WN-dj0" secondAttribute="top" constant="20" id="DP1-X5-UhM"/>
                             <constraint firstItem="wjS-eo-CS9" firstAttribute="leading" secondItem="ASr-WN-dj0" secondAttribute="leading" constant="20" id="EXw-im-s9J"/>
                             <constraint firstItem="Kqa-aV-VGs" firstAttribute="centerX" secondItem="fh6-3V-2Xv" secondAttribute="centerX" id="I8t-rn-fkd"/>
                             <constraint firstItem="Jvp-Yx-0uF" firstAttribute="centerX" secondItem="fh6-3V-2Xv" secondAttribute="centerX" id="J1v-rc-RsU"/>
+                            <constraint firstItem="clW-4d-4VE" firstAttribute="top" secondItem="5Ng-G6-Mib" secondAttribute="bottom" constant="20" id="Kzq-lF-pyx"/>
                             <constraint firstItem="wjS-eo-CS9" firstAttribute="top" secondItem="Jvp-Yx-0uF" secondAttribute="bottom" constant="30" id="McH-eP-t8I"/>
                             <constraint firstItem="5Ng-G6-Mib" firstAttribute="leading" secondItem="ASr-WN-dj0" secondAttribute="leading" constant="20" id="TjO-Jl-nb7"/>
-                            <constraint firstItem="Kqa-aV-VGs" firstAttribute="top" secondItem="5Ng-G6-Mib" secondAttribute="bottom" constant="20" id="fcr-Xe-a97"/>
+                            <constraint firstItem="clW-4d-4VE" firstAttribute="leading" secondItem="ASr-WN-dj0" secondAttribute="leading" constant="20" id="XXf-ke-3mH"/>
+                            <constraint firstItem="ASr-WN-dj0" firstAttribute="trailing" secondItem="clW-4d-4VE" secondAttribute="trailing" constant="20" id="Ym2-rV-bpD"/>
+                            <constraint firstItem="Kop-9d-kqA" firstAttribute="top" secondItem="clW-4d-4VE" secondAttribute="bottom" constant="1" id="ccj-5F-6I7"/>
+                            <constraint firstItem="ASr-WN-dj0" firstAttribute="trailing" secondItem="Kop-9d-kqA" secondAttribute="trailing" constant="20" id="gHQ-e3-joS"/>
                             <constraint firstItem="ASr-WN-dj0" firstAttribute="trailing" secondItem="5Ng-G6-Mib" secondAttribute="trailing" constant="20" id="qNA-qE-K2s"/>
                             <constraint firstItem="ASr-WN-dj0" firstAttribute="trailing" secondItem="wjS-eo-CS9" secondAttribute="trailing" constant="20" id="uGF-qg-abw"/>
                         </constraints>
@@ -119,6 +137,8 @@
                         <outlet property="grabarButton" destination="tLV-nH-A4b" id="GZm-gP-CLX"/>
                         <outlet property="nombreTextField" destination="5Ng-G6-Mib" id="dkH-SP-QTa"/>
                         <outlet property="reproducirButton" destination="Jvp-Yx-0uF" id="gmH-If-DxO"/>
+                        <outlet property="tiempoGrabacionLabel" destination="clW-4d-4VE" id="7VT-E4-3BK"/>
+                        <outlet property="volumenSlider" destination="Kop-9d-kqA" id="iHC-XJ-FqJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3MR-7s-PGl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

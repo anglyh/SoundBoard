@@ -19,11 +19,23 @@ class SoundViewController: UIViewController {
     var reproducirAudio: AVAudioPlayer?
     var audioURL: URL?
     
+    var timer: Timer?
+    var tiempoGrabacion: Int = 0
+    @IBOutlet weak var tiempoGrabacionLabel: UILabel!
+    
+    @IBOutlet weak var volumenSlider: UISlider!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configurarGrabacion()
         reproducirButton.isEnabled = false
         agregarButton.isEnabled = false
+    }
+
+    @IBAction func cambiarVolumen(_ sender: Any) {
+        if let slider = sender as? UISlider {
+            reproducirAudio?.volume = slider.value
+        }
     }
     
     @IBAction func grabarTapped(_ sender: Any) {
@@ -34,12 +46,23 @@ class SoundViewController: UIViewController {
             grabarButton.setTitle("GRABAR", for: .normal)
             reproducirButton.isEnabled = true
             agregarButton.isEnabled = true
+            timer?.invalidate()
         } else {
             // empezar a grabar
             grabarAudio?.record()
             grabarButton.setTitle("DETENER", for: .normal)
             reproducirButton.isEnabled = false
+            tiempoGrabacion = 0
+            tiempoGrabacionLabel.text = "00:00"
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(actualizarTiempoGrabacion), userInfo: nil, repeats: true)
         }
+    }
+    
+    @objc func actualizarTiempoGrabacion() {
+        tiempoGrabacion += 1
+        let minutos = tiempoGrabacion / 60
+        let segundos = tiempoGrabacion % 60
+        tiempoGrabacionLabel.text = String(format: "%02d:%02d", minutos, segundos)
     }
     
     @IBAction func reproducirTapped(_ sender: Any) {
@@ -57,8 +80,10 @@ class SoundViewController: UIViewController {
         let grabacion = Grabacion(context: context)
         grabacion.nombre = nombreTextField.text
         grabacion.audio = NSData(contentsOf: audioURL!)! as Data
+        grabacion.duracion = Int32(tiempoGrabacion)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         navigationController!.popViewController(animated: true)
+        
     }
     
     func configurarGrabacion() {
